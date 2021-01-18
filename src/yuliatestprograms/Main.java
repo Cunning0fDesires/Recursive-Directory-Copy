@@ -12,6 +12,12 @@ public class Main {
         File sourceDirectory = new File(source);
         File destDirectory = new File(destination);
 
+        if (!destDirectory.exists()) {
+            destDirectory.mkdir();
+            System.out.println("Directory " + destDirectory.getAbsolutePath()
+                    + " has been created");
+        }
+
     }
 
 
