@@ -1,6 +1,7 @@
 package yuliatestprograms;
 
 import java.io.*;
+import java.util.List;
 
 public class Main {
 
@@ -8,15 +9,26 @@ public class Main {
 
     }
 
-    public static void copyDirectory(String source, String destination) {
-        File sourceDirectory = new File(source);
-        File destDirectory = new File(destination);
+    public static void copyDirectory(File sourceDirectory, File destDirectory) {
 
         if (!destDirectory.exists()) {
             destDirectory.mkdir();
             System.out.println("Directory " + destDirectory.getAbsolutePath()
                     + " has been created");
         }
+
+        String sourceFiles [] = sourceDirectory.list();
+
+        for (String file: sourceFiles) {
+        File sourceFile = new File(sourceDirectory, file);
+        File destFile = new File(destDirectory, file);
+
+            if (sourceFile.isDirectory()) {
+                copyDirectory(sourceFile, destFile);
+            }
+            else copyFile(sourceFile, destFile);
+        }
+
 
     }
 
